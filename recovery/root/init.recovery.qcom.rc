@@ -1,0 +1,47 @@
+import /init.recovery.qcom_decrypt.rc
+
+on early-init
+    insmod /lib/modules/mmi_annotate.ko
+    insmod /lib/modules/mmi_info.ko
+    insmod /lib/modules/cw2217b_fg_mmi.ko
+    insmod /lib/modules/adapter_class.ko
+    insmod /lib/modules/mmi_charger.ko
+    insmod /lib/modules/mmi_discrete_charger_class.ko
+    insmod /lib/modules/sgm4154x_charger.ko
+    insmod /lib/modules/mmi_discrete_charger.ko
+    insmod /lib/modules/qpnp_adaptive_charge.ko
+    insmod /lib/modules/tcpc_class.ko
+    insmod /lib/modules/tcpc_sgm7220.ko
+    insmod /lib/modules/rt_pd_manager.ko
+
+on init
+    setprop sys.usb.configfs 1
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+on post-fs
+    start boot-hal-1-1
+
+on boot
+    start health-hal-2-1
+    write /config/usb_gadget/g1/idVendor 0x22b8
+    mkdir /config/usb_gadget/g1/functions/mtp.gs0
+    write /config/usb_gadget/g1/os_desc/use 1
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x1
+    write /config/usb_gadget/g1/os_desc/qw_sign "MSFT100"
+    symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
+
+on property:sys.usb.ffs.ready=1 && property:sys.usb.config=adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0x2e81
+
+on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
+    start adbd
+
+on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0x2e76
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp_adb"
+    write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "MTP"
+    symlink /config/usb_gadget/g1/functions/mtp.gs0 /config/usb_gadget/g1/configs/b.1/f1
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
+    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    setprop sys.usb.state ${sys.usb.config}

@@ -1,0 +1,16 @@
+# Standard AOSP partitions
+/boot             emmc    /dev/block/bootdevice/by-name/boot           flags=slotselect
+/vendor_boot      emmc    /dev/block/bootdevice/by-name/vendor_boot    flags=slotselect;flashimg
+/dtbo             emmc    /dev/block/bootdevice/by-name/dtbo           flags=slotselect
+/vbmeta           emmc    /dev/block/bootdevice/by-name/vbmeta         flags=slotselect;flashimg
+
+# Needed for time
+/persist          ext4    /dev/block/bootdevice/by-name/persist
+
+# Backup
+/persist_image    emmc    /dev/block/bootdevice/by-name/persist        flags=backup
+/prodpersist      emmc    /dev/block/bootdevice/by-name/prodpersist    flags=backup
+
+# Removable storage
+/external_sd      auto    /dev/block/mmcblk0p1
+/usb-otg          auto    /dev/block/sdg*                              flags=storage;removable;wipeingui

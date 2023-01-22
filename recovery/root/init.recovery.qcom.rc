@@ -1,19 +1,5 @@
 import /init.recovery.qcom_decrypt.rc
 
-on early-init
-    insmod /lib/modules/mmi_annotate.ko
-    insmod /lib/modules/mmi_info.ko
-    insmod /lib/modules/cw2217b_fg_mmi.ko
-    insmod /lib/modules/adapter_class.ko
-    insmod /lib/modules/mmi_charger.ko
-    insmod /lib/modules/mmi_discrete_charger_class.ko
-    insmod /lib/modules/sgm4154x_charger.ko
-    insmod /lib/modules/mmi_discrete_charger.ko
-    insmod /lib/modules/qpnp_adaptive_charge.ko
-    insmod /lib/modules/tcpc_class.ko
-    insmod /lib/modules/tcpc_sgm7220.ko
-    insmod /lib/modules/rt_pd_manager.ko
-
 on init
     setprop sys.usb.configfs 1
     wait /dev/block/platform/soc/${ro.boot.bootdevice}

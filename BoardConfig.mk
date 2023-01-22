@@ -109,11 +109,7 @@ TARGET_USES_MKE2FS := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Kernel module loading for touch, battery etc
-TW_LOAD_VENDOR_MODULES := "adapter_class.ko bq2589x_charger.ko bq2597x_mmi_iio.ko cw2217b_fg_mmi.ko focaltech_v3.ko \
-            goodix_brl_mmi.ko mmi_annotate.ko mmi_charger.ko mmi_discrete_charger_class.ko mmi_discrete_charger.ko \
-            mmi_discrete_turbo_charger.ko mmi_info.ko mmi_qc3p_wt6670f.ko mmi_relay.ko qpnp_adaptive_charge.ko \
-            rt_pd_manager.ko sensors_class.ko sgm4154x_charger.ko synaptics_v2_mmi.ko tcpc_class.ko tcpc_sgm7220.ko \
-            touchscreen_mmi.ko"
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1)\")
 
 # Include decryption support
 TW_INCLUDE_CRYPTO := true

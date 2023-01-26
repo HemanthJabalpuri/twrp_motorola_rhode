@@ -13,4 +13,7 @@
 
 # Removable storage
 /external_sd      auto    /dev/block/mmcblk0p1
-/usb-otg          auto    /dev/block/sdg*                              flags=storage;removable;wipeingui
+# Note: if your disk connected through OTG have multiple partitions then
+# only 1st partition is mounted for convenience
+# if you want to mount all partitions then replace sdg1 with sdg*, but it is somewhat errorprone
+/usb-otg          auto    /dev/block/sdg1                              flags=storage;removable;wipeingui

@@ -27,18 +27,15 @@ PRODUCT_SHIPPING_API_LEVEL := 31
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Boot control hal for A/B
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-impl-qti.recovery
+PRODUCT_PACKAGES += android.hardware.boot@1.1-impl-qti.recovery
 
 # Blacklist
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
-    ro.bootimage.build.date.utc \
-    ro.build.date.utc
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST += ro.bootimage.build.date.utc ro.build.date.utc
 
 # Decryption
-PRODUCT_PACKAGES += \
-    qcom_decrypt \
-    qcom_decrypt_fbe
+PRODUCT_PACKAGES += qcom_decrypt qcom_decrypt_fbe
 
-# Copy modules for depmod
+# Kernel module loading for touch, battery etc
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1)\")
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*.ko,$(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1)

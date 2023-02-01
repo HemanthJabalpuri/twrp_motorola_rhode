@@ -75,7 +75,7 @@ TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 
 # Brightness
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
+TW_BRIGHTNESS_PATH := /sys/class/backlight/panel0-backlight/brightness
 TW_DEFAULT_BRIGHTNESS := 1800
 
 # Fix can't able to wake with touch after sleep
@@ -86,9 +86,6 @@ TW_NO_HAPTICS := true
 
 # Time
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-
-# Battery
-TW_CUSTOM_BATTERY_PATH := "/sys/class/power_supply/mmi_battery"
 
 # Statusbar icons flags
 TW_STATUS_ICONS_ALIGN := center

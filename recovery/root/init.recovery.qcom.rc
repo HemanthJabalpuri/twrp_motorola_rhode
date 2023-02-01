@@ -1,5 +1,3 @@
-import /init.recovery.qcom_decrypt.rc
-
 on init
     setprop sys.usb.configfs 1
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -31,3 +29,39 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,adb && property:s
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
+
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
+on property:ro.crypto.state=encrypted && property:hwservicemanager.ready=true
+    start qseecomd
+
+on property:vendor.sys.listeners.registered=true
+    start gatekeeper-1-0-qti
+    start keymaster-4-1-qti
+
+on property:twrp.all.users.decrypted=true
+    stop qseecomd
+    stop gatekeeper-1-0-qti
+    stop keymaster-4-1-qti
+
+service qseecomd /vendor/bin/qseecomd
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64
+    disabled
+    seclabel u:r:recovery:s0
+
+service gatekeeper-1-0-qti /vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64
+    disabled
+    seclabel u:r:recovery:s0
+
+service keymaster-4-1-qti /vendor/bin/hw/android.hardware.keymaster@4.1-service-qti
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64
+    disabled
+    seclabel u:r:recovery:s0

@@ -93,7 +93,7 @@ TW_CUSTOM_CLOCK_POS := 50
 TW_CUSTOM_CPU_POS := 280
 TW_CUSTOM_BATTERY_POS := 790
 
-# USB
+# Use our own USB config
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # For mounting NTFS
@@ -110,12 +110,14 @@ TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root
 
 # Include decryption support
 TW_INCLUDE_CRYPTO := true
-BOARD_USES_QCOM_FBE_DECRYPTION := true
 RECOVERY_SDCARD_ON_DATA := true
 # include below when enabling decryption
 # without these it may stuck on TWRP splash
 TARGET_RECOVERY_DEVICE_MODULES += libion
 RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
+
+# Don't mount apex files (no need for now)
+TW_EXCLUDE_APEX := true
 
 # Debuging flags
 TWRP_INCLUDE_LOGCAT := true

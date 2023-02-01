@@ -64,6 +64,9 @@ PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
+# Fix for copying *.ko
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 
 ##### TWRP Flags #####
 TW_THEME := portrait_hdpi
@@ -101,6 +104,9 @@ TARGET_USES_MKE2FS := true
 
 # Include magiskboot for repacking bootimg
 TW_INCLUDE_REPACKTOOLS := true
+
+# Kernel module loading for touch, battery etc
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1)\")
 
 # Include decryption support
 TW_INCLUDE_CRYPTO := true

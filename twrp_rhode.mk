@@ -4,9 +4,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 
-# define hardware platform (not a AOSP flag)
-PRODUCT_PLATFORM := bengal
-
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := rhode
 PRODUCT_NAME := twrp_$(PRODUCT_DEVICE)
@@ -14,8 +11,11 @@ PRODUCT_BRAND := motorola
 PRODUCT_MODEL := moto g52
 PRODUCT_MANUFACTURER := motorola
 
+# Common path for device trees
+COMMON_PATH := device/$(PRODUCT_BRAND)/sm6225-common
+
 # Default device path for tree
 DEVICE_PATH := device/$(PRODUCT_BRAND)/$(PRODUCT_DEVICE)
 
 # Inherit from device
-$(call inherit-product, $(DEVICE_PATH)/device.mk)
+$(call inherit-product, $(COMMON_PATH)/common.mk)

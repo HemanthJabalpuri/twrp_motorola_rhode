@@ -113,7 +113,6 @@ TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root
 
 # Include decryption support
 TW_INCLUDE_CRYPTO := true
-BOARD_USES_QCOM_FBE_DECRYPTION := true
 RECOVERY_SDCARD_ON_DATA := true
 # include below when enabling decryption
 # without these it may stuck on TWRP splash

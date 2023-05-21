@@ -1,21 +1,5 @@
-#
-# Copyright (C) 2018 The Android Open-Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 # Platform
-TARGET_BOARD_PLATFORM := $(PRODUCT_PLATFORM)
+TARGET_BOARD_PLATFORM := bengal
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := $(PRODUCT_DEVICE)
@@ -75,10 +59,10 @@ TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 
 # Brightness
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
+TW_BRIGHTNESS_PATH := /sys/class/backlight/panel0-backlight/brightness
 TW_DEFAULT_BRIGHTNESS := 1800
 
-# Fix can't able to wake with touch after sleep
+# Add support of able to wake with touch after sleep
 TW_NO_SCREEN_BLANK := true
 
 # Remove vibration support
@@ -87,22 +71,19 @@ TW_NO_HAPTICS := true
 # Time
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 
-# Battery
-TW_CUSTOM_BATTERY_PATH := "/sys/class/power_supply/mmi_battery"
-
 # Statusbar icons flags
 TW_STATUS_ICONS_ALIGN := center
 TW_CUSTOM_CLOCK_POS := 50
 TW_CUSTOM_CPU_POS := 280
 TW_CUSTOM_BATTERY_POS := 790
 
-# USB
+# Use our own USB config
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # For mounting NTFS
 TW_INCLUDE_NTFS_3G := true
 
-# Use mke2fs to create ext4 images
+# Use mke2fs for formatting ext4 partitions
 TARGET_USES_MKE2FS := true
 
 # Include magiskboot for repacking bootimg
@@ -118,6 +99,9 @@ RECOVERY_SDCARD_ON_DATA := true
 # without these it may stuck on TWRP splash
 TARGET_RECOVERY_DEVICE_MODULES += libion
 RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
+
+# Don't mount apex files (no need for now)
+TW_EXCLUDE_APEX := true
 
 # Debuging flags
 TWRP_INCLUDE_LOGCAT := true

@@ -39,7 +39,7 @@ fi
 echo "isbooted $isbooted"
 echo "Module path is $module_path"
 
-sleep 2 # needed to make touch work
+sleep 3 # needed to make touch work
 
 for i in $modules; do
   insmod $module_path/${i}.ko

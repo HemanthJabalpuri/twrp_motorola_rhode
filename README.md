@@ -24,9 +24,10 @@ Front Camera | 16 MP, f/2.5, (wide), 1.0µm
 - Brightness, Time
 - Battery %, Charging, CPU Temp
 - Slot switching (thanks to [@invisiblek](https://github.com/LineageOS/android_device_motorola_nash/commit/ba70a48f8d0ab12666d2d37e31f581697423ae02) and [@ThEMarD](https://github.com/ThEMarD))
+- Flashing ROM
 
 ### Issues
 - Vibration (removed for now)
-- Flashing ROM (not yet tested)
+- touch & other issues may appear in future custom ROMs
 
 ### See Wiki for building and other info

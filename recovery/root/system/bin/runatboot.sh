@@ -7,7 +7,7 @@ modules="mmi_relay sensors_class touchscreen_mmi goodix_brl_mmi focaltech_v3 syn
 # it seems like touch modules are needed to load with a delay, so this script (this behaviour is only with custom kernel)
 # 
 # Custom ROM vendorboot has touch modules in it, so init will load it automatically
-# to stop this, we need to apply a patch https://github.com/HemanthJabalpuri/twrp_motorola_rhode/files/11550608/dontLoadVendorModules.txt
+# to stop this, we need to apply a patch https://github.com/HemanthJabalpuri/twrp_motorola_rhode/files/11550608/dontLoadVendorModules.txt at system/core
 
 isbooted=0
 cat /proc/cmdline | grep -q "twrpfastboot=1"

@@ -69,6 +69,9 @@ TW_NO_SCREEN_BLANK := true
 # Remove vibration support
 TW_NO_HAPTICS := true
 
+# Battery
+TW_USE_LEGACY_BATTERY_SERVICES := true
+
 # Time
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 

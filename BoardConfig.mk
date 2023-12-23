@@ -95,6 +95,7 @@ TW_INCLUDE_REPACKTOOLS := true
 
 # Kernel module loading for touch, battery etc
 TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1)\")
+TW_LOAD_VENDOR_BOOT_MODULES := true
 
 # Include decryption support
 TW_INCLUDE_CRYPTO := true

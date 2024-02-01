@@ -70,6 +70,7 @@ TW_NO_SCREEN_BLANK := true
 TW_NO_HAPTICS := true
 
 # Battery
+# https://gerrit.twrp.me/c/android_bootable_recovery/+/6945
 TW_USE_LEGACY_BATTERY_SERVICES := true
 
 # Time
@@ -89,9 +90,6 @@ TW_INCLUDE_NTFS_3G := true
 
 # Use mke2fs for formatting ext4 partitions
 TARGET_USES_MKE2FS := true
-
-# Include magiskboot for repacking bootimg
-TW_INCLUDE_REPACKTOOLS := true
 
 # Kernel module loading for touch, battery etc
 TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/1.1)\")
